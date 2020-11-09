@@ -1,0 +1,14 @@
+dist: trusty
+sudo: required
+language: bash
+before_install:
+# packer validate
+# terraform validate
+# tflint
+# ansible-lint
+# otus tests
+- curl https://raw.githubusercontent.com/express42/otus-homeworks/2020-08/run.sh | bash
+notifications:
+  slack:
+    rooms:
+      secure: TulNMTWuC8FSaQ43La16OgDgAGTkbShL40GQO2b3pBzKJX6wnHF3gPmwvf/XOM4kfW8evqLC40MWTTG/vpRSG+r/hIu/kxQam/l7nwPvlJWhIDLsUN0C+RS8GH9YR+T63oPF3bdkIjpRVwVeD0YoxzscDLcmEvVoM2o514WBgaJDLYa5yBDfo2K2W/ngPPaFeFR7rMGy0WD1GKIgDbZtuaSuLlHbzNLNtclIoBZGaTjdJFs3Bc0tHzSu/farsQF9TFEKEpVwIikFRuKL6AVKfD0QcOPdfgfYp4GZvdsgBVt29jID4c5yogpfZLZ+MnBNYQ2KbCX1+m29JzuZkSTtAup4S+6bMB2mAcnIBDl+mqeQ1euvTDDOd5DC2W1wAfOev++1ZEaIHQ7v2KfdByk2nGApR/j23rXeCys7vFHx1h555zTQ6SM+WW1WxtgUi8hyyl8nCItCzaLa6R5BE0Qt3YHSRMKmMgyGeVlFbAro84FCqqqB9PhvlnoY7lfiHanmZjJfa30IIz5Nw/qPThdbNcRSW2NfIt5x4BlqTDQLsGPu6iJ1TmJg/Ga3Cgpon/FLmw5N3y2HaBouas2BKSj0Agn70qxwZOLo005H1JNznPrcPAmA5KpDWdqJCMIXG0ztRs2UGeOyDHYyMetvxsG7nykRUgPtM5ToRoVGuDhs6oE=
