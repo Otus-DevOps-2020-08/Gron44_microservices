@@ -1,0 +1,42 @@
+---
+  - name: Install docker
+    hosts: all
+    become: true
+    gather_facts: yes
+    remote_user: ubuntu
+    tasks:
+      # Add specified repository into sources list.
+      - name: Install packages to allow apt to use a repository over HTTPS
+        become: true
+        apt:
+          update_cache: yes
+          cache_valid_time: 86400 #One day
+          state: present
+          name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+      - name: Add an Apt signing key, uses whichever key is at the URL
+        become: true
+        apt_key:
+          url: https://download.docker.com/linux/ubuntu/gpg
+          state: present
+      - apt_repository:
+          repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+          state: present
+      - name: Install docker
+        become: true
+        apt:
+          update_cache: yes
+          state: present
+          name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+
+      - name: Configure service docker
+        service:
+          name: docker
+          state: started

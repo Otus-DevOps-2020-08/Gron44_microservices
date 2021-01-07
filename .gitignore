@@ -1,0 +1,6 @@
+.terraform/
+.terraform.lock.hcl
+dockermonolith/docker-monolith/infra/secrets/*
+!dockermonolith/docker-monolith/infra/secrets/.gitkeep
+
+dockermonolith/docker-monolith/infra/dev_hosts
