@@ -2,7 +2,7 @@ dist: trusty
 sudo: required
 language: bash
 before_install:
-- curl https://raw.githubusercontent.com/Gron44/otus-homeworks/2020-08/run.sh |
+- curl https://raw.githubusercontent.com/Gron44/otus-homeworks/2020-11/run.sh |
   bash
 notifications:
   slack:
