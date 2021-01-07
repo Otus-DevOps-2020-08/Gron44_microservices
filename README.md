@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/Otus-DevOps-2020-08/Gron44_infra.svg?branch=Docker-2)](https://travis-ci.com/Otus-DevOps-2020-08/Gron44_infra)
 # Gron44_microservices
 Gron44 microservices repository
 
