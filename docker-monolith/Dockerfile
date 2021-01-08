@@ -7,7 +7,7 @@ RUN git clone -b monolith https://github.com/express42/reddit.git
 
 COPY mongod.conf /etc/mongod.conf
 COPY db_config /reddit/db_config
-COPY Gemfile.lock /reddit/Gemfile.lock
+COPY Gemfile_lock /reddit/Gemfile.lock
 COPY start.sh /start.sh
 
 
