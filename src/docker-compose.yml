@@ -1,0 +1,44 @@
+version: '3'
+services:
+  post_db:
+    image: mongo:latest
+    volumes:
+      - reddit_db:/data/db
+    networks:
+      back_net:
+        aliases:
+        - post_db
+        - comment_db
+  ui:
+    image: ${USERNAME}/ui:1.0
+    ports:
+      - 9292:${DOCKER_COMPOSE_PORT_OUT}/tcp
+    networks:
+      - front_net
+  post:
+    image: ${USERNAME}/post:1.0
+    networks:
+      back_net:
+        aliases:
+          - post
+      front_net:
+        aliases:
+          - post
+  comment:
+    image: ${USERNAME}/comment:1.0
+    networks:
+      back_net:
+        aliases:
+          - comment
+      front_net:
+        aliases:
+          - comment
+
+volumes:
+  reddit_db:
+    # Uncomment if volume already created
+    # external: true
+
+networks:
+  back_net:
+  front_net:

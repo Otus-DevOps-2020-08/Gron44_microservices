@@ -1,5 +1,7 @@
 .terraform/
 .terraform.lock.hcl
+.env
+
 docker-monolith/infra/secrets/*
 !docker-monolith/infra/secrets/.gitkeep
 
