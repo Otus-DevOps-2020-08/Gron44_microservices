@@ -50,4 +50,4 @@ Gron44 microservices repository
 Перейти по ссылке \<IP docker хоста\>:9292
 
 ## PR checklist
- - [x] Выставил label с темой домашнего задания
+ - [x] Выставил label с темой домашнего задания.
