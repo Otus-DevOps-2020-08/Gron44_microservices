@@ -14,7 +14,7 @@ COPY Gemfile_lock /reddit/Gemfile.lock
 COPY start.sh /start.sh
 
 
-WORKDIR /reddit 
+WORKDIR /reddit
 RUN bundle install
 RUN chmod 0777 /start.sh
 

@@ -14,6 +14,6 @@ RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 ENV COMMENT_DATABASE_HOST=comment_db \
-    COMMENT_DATABASE=comments 
+    COMMENT_DATABASE=comments
 
 CMD ["puma"]

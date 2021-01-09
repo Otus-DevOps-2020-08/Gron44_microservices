@@ -1,11 +1,11 @@
 {
-    "folder_id": "b1ga4qpmadg7vt5lsung",
-    "cloud_id": "b1gfsofllvq4jg8n05kb",
-    "service_account_key_file": "../secrets/key.json",
-    "source_image_id": "fd8vqk0bcfhn31stn2ts",
-    "instance_cores" : "2",
-    "instance_mem_gb" : "2",
-    "disk_type": "network-hdd",
-    "disk_size_gb": "10",
-    "preemptible": "true"
+  "cloud_id": "b1gfsofllvq4jg8n05kb",
+  "disk_size_gb": "10",
+  "disk_type": "network-hdd",
+  "folder_id": "b1ga4qpmadg7vt5lsung",
+  "instance_cores": "2",
+  "instance_mem_gb": "2",
+  "preemptible": "true",
+  "service_account_key_file": "../secrets/key.json",
+  "source_image_id": "fd8vqk0bcfhn31stn2ts"
 }
