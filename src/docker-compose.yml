@@ -3,9 +3,7 @@ services:
   post_db:
     image: mongo:latest
     volumes:
-      - type: volume
-        source: reddit_db
-        target: /data/db
+      - reddit_db:/data/db
     networks:
       back_net:
         aliases:
