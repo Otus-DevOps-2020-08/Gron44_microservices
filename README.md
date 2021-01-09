@@ -1,82 +1,51 @@
-[![Build Status](https://travis-ci.com/Gron44/Gron44_microservices.svg?branch=docker-2)](https://travis-ci.com/Gron44/Gron44_microservices)
+
+[![Build Status](https://travis-ci.com/Gron44/Gron44_microservices.svg?branch=docker-3)](https://travis-ci.com/Gron44/Gron44_microservices)
+
 Travis CI перенастроен на форк репозитория студента (Gron44/Gron44_microservices)
+
 [Инструкция](https://github.com/Gron44/otus-homeworks/wiki/Travis-CI)
+
 # Gron44_microservices
+
 Gron44 microservices repository
 
-# ДЗ № 16 Docker-2
- - [x] Основное задание
- - [x] Вывод команды docker images в файл `docker-monolith/docker-1.log`
- - [x] На основе вывода команд объясните чем отличается контейнер от
-образа. Объяснение допишите в файл `dockermonolith/docker-1.log`
+
+
+# ДЗ № 17 Docker-3
+
+-  [x] Основное задание
+
 # Задание со *
- - [x] Нужно реализовать в виде прототипа в директории `/docker-monolith/infra/`
- - [x] Поднятие инстансов с помощью Terraform, их количество задается переменной
- - [x] Несколько плейбуков Ansible с использованием динамического инвентори для установки докера и запуска там образа приложения
- - [x] Шаблон пакера, который делает образ с уже установленным Docker
 
-## Подготовка
+-  [x] При запуске контейнеров ( `docker run` ) задайте им переменные окружения соответствующие новым сетевым алиасам, не пересоздавая образ
+```
+docker run -d \
+	--network=reddit \
+	--network-alias=new_post_db \
+	--network-alias=new_comment_db \
+	mongo:latest
 
-### скачиваем git репозиторий
+docker run -d \
+	--network=reddit \
+	--network-alias=new_post \
+	-e POST_DATABASE_HOST=new_post_db \
+	popadec/post:1.0
 
-    git clone https://github.com/Otus-DevOps-2020-08/Gron44_infra.git
+docker run -d \
+	--network=reddit \
+	--network-alias=new_comment \
+	-e COMMENT_DATABASE_HOST=new_comment_db \
+	popadec/comment:1.0
 
-### Переходим в основную директорию
+docker run -d \
+	--network=reddit \
+	-e POST_SERVICE_HOST=new_post \
+	-e COMMENT_SERVICE_HOST=new_comment \
+	-p 9292:9292 \
+	popadec/ui:1.0
+```
 
-    cd ./Gron44_microservices/dockermonolith/infra
-
-## необходимые секреты для работы
-|файл|назначение|
-|--|--|
-|**key.json**|ключевой файл сервисного аккаунта Yandex Cloud|
-|**ubuntu / ubuntu.pub**|ssh-rsa ключи для управления виртуальными машинами|
-|**env**|переменные окружения для передачи backend секретов в terraform|
-
-## packer
-    cd ./packer
-
-    packer build -var-file variables.json docker.json`
-
-    cd ../
-
-## terraform
-
-### необходимые переменные окружения
-|переменная|назначение|
-|--|--|
-|**TFSTATE_BUCKET**|имя существующего YC s3 хранилища (ToDo: как создать)|
-|**TFSTATE_REGION**|регион этого хранилища|
-|**TFSTATE_ACCESS_KEY**|Key_ID ключа доступа (ToDo: как создать)|
-|**TFSTATE_SECRET_KEY**|секрет ключа доступа|
-
-### Развернуть окружение
-
-    cd ./terraform/dev
-
-    source ../../secrets/env
-
-    terraform init \
-    	-backend-config="bucket=${TFSTATE_BUCKET}" \
-    	-backend-config="access_key=${TFSTATE_ACCESS_KEY}" \
-    	-backend-config="secret_key=${TFSTATE_SECRET_KEY}" \
-    	-backend-config="region=${TFSTATE_REGION}"
-
-    terraform apply --auto-approve
-
-    unset TFSTATE_BUCKET TFSTATE_KEY TFSTATE_ACCESS_KEY TFSTATE_SECRET_KEY TFSTATE_REGION
-
-    cd ../../
-
-### Скачать и запустить docker контейнеры
-
-    cd ./ansible
-
-    ansible-playbook playbooks/app.yml
-
-    cd ../
-
-### Уничтожить окружение
-
-    cd ./terraform/dev
-
-    terraform destroy --auto-approve
+- [x] Попробуйте собрать образ на основе `Alpine Linux`
+  -  Пересобраны все Dockerfile с использованием соответствующего alpine образа, часть первичных операций унифицирована для переиспользования слоев
+- [x] Придумайте еще способы уменьшить размер образа.
+  - Multistage сборки, более активное использование минималистичных образов и удаление ненужных файлов/пакетов,
