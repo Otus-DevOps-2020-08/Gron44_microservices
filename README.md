@@ -1,51 +1,53 @@
 
-[![Build Status](https://travis-ci.com/Gron44/Gron44_microservices.svg?branch=docker-3)](https://travis-ci.com/Gron44/Gron44_microservices)
-
-Travis CI перенастроен на форк репозитория студента (Gron44/Gron44_microservices)
-
-[Инструкция](https://github.com/Gron44/otus-homeworks/wiki/Travis-CI)
+[![Build Status](https://travis-ci.com/Gron44/Gron44_microservices.svg?branch=docker-4)](https://travis-ci.com/Gron44/Gron44_microservices)
+Travis CI перенастроен на форк репозитория студента (Gron44/Gron44_microservices) [Инструкция](https://github.com/Gron44/otus-homeworks/wiki/Travis-CI)
 
 # Gron44_microservices
-
 Gron44 microservices repository
 
 
 
-# ДЗ № 17 Docker-3
+# ДЗ № 18 Docker-4
 
--  [x] Основное задание
+Основное задание:
+- [x] Изменить docker-compose под кейс с множеством сетей, сетевых алиасов (стр 18).
+- [x] Параметризуйте с помощью переменных окружений:
+  - порт публикации сервиса ui
+  - версии сервисов
+  - возможно что-либо еще на ваше усмотрение
+- [x] Параметризованные параметры запишите в отдельный файл с расширением .env
+- [x] Без использования команд source и export docker-compose должен подхватить переменные из этого файла.
+- [x] Узнайте как образуется базовое имя проекта. Можно ли его задать? Если можно то как? Ответ добавьте в Readme.md данного ДЗ
+  - Использование переменной окружения `COMPOSE_PROJECT_NAME`
+  - использовать флаг `-p, --project-name` (`docker-compose -p foo up`)
 
-# Задание со *
+Задание со *:
+- [x]  Создайте docker-compose.override.yml для reddit проекта, который позволит
+  -  Изменять код каждого из приложений, не выполняя сборку образа
+  -  Запускать puma для руби приложений в дебаг режиме с двумя воркерами (флаги --debug и -w 2)
 
--  [x] При запуске контейнеров ( `docker run` ) задайте им переменные окружения соответствующие новым сетевым алиасам, не пересоздавая образ
-```
-docker run -d \
-	--network=reddit \
-	--network-alias=new_post_db \
-	--network-alias=new_comment_db \
-	mongo:latest
+## Как запустить проект:
+### скачиваем git репозиторий с нужной веткой
+    git clone --single-branch --branch docker-4 https://github.com/Otus-DevOps-2020-08/Gron44_infra.git
 
-docker run -d \
-	--network=reddit \
-	--network-alias=new_post \
-	-e POST_DATABASE_HOST=new_post_db \
-	popadec/post:1.0
+### Переходим в основную директорию
+    cd ./Gron44_microservices/src
 
-docker run -d \
-	--network=reddit \
-	--network-alias=new_comment \
-	-e COMMENT_DATABASE_HOST=new_comment_db \
-	popadec/comment:1.0
+### необходимые секреты для работы
+|файл|назначение|
+|--|--|
+|`.env`|файл с необходимымы переменными окружения для `docker-compose.yml`, пример файла `.env.example`|
 
-docker run -d \
-	--network=reddit \
-	-e POST_SERVICE_HOST=new_post \
-	-e COMMENT_SERVICE_HOST=new_comment \
-	-p 9292:9292 \
-	popadec/ui:1.0
-```
+### docker
+Создаем отдельный volume для БД
 
-- [x] Попробуйте собрать образ на основе `Alpine Linux`
-  -  Пересобраны все Dockerfile с использованием соответствующего alpine образа, часть первичных операций унифицирована для переиспользования слоев
-- [x] Придумайте еще способы уменьшить размер образа.
-  - Multistage сборки, более активное использование минималистичных образов и удаление ненужных файлов/пакетов,
+    docker volume create reddit_db
+
+### docker-compose
+    docker-compose up -d
+
+## Как проверить работоспособность:
+Перейти по ссылке \<IP docker хоста\>:9292
+
+## PR checklist
+ - [x] Выставил label с темой домашнего задания
