@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.com/Otus-DevOps-2020-08/Gron44_infra.svg?branch=Docker-2)](https://travis-ci.com/Otus-DevOps-2020-08/Gron44_infra)
+[![Build Status](https://travis-ci.com/Gron44/Gron44_microservices.svg?branch=docker-2)](https://travis-ci.com/Gron44/Gron44_microservices)
+Travis CI перенастроен на форк репозитория студента (Gron44/Gron44_microservices)
+[Инструкция](https://github.com/Gron44/otus-homeworks/wiki/Travis-CI)
 # Gron44_microservices
 Gron44 microservices repository
 
@@ -21,7 +23,7 @@ Gron44 microservices repository
 
 ### Переходим в основную директорию
 
-    cd ./Gron44_microservices/dockermonolith/docker-monolith/infra
+    cd ./Gron44_microservices/dockermonolith/infra
 
 ## необходимые секреты для работы
 |файл|назначение|
