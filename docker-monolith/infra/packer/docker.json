@@ -1,30 +1,30 @@
 {
-    "builders": [
-        {
-            "type":         "yandex",
-            "image_name":   "docker-{{timestamp}}",
-            "image_family": "docker",
-            "ssh_username": "ubuntu",
-            "platform_id": "standard-v1",
-            "use_ipv4_nat": "true",
-            "service_account_key_file": "{{user `service_account_key_file`}}",
-            "folder_id":                "{{user `folder_id`}}",
-            "source_image_id":          "{{user `source_image_id`}}",
-            "instance_cores" :          "{{user `instance_cores`}}",
-            "instance_mem_gb" :         "{{user `instance_mem_gb`}}",
-            "disk_type":                "{{user `disk_type`}}",
-            "disk_size_gb":             "{{user `disk_size_gb`}}",
-            "preemptible":              "{{user `preemptible`}}"
-        }
-    ],
-    "provisioners": [
-        {
-            "type": "ansible",
-            "playbook_file": "../ansible/playbooks/packer-python.yml"
-        },
-        {
-            "type": "ansible",
-            "playbook_file": "../ansible/playbooks/packer-docker.yml"
-        }
-    ]
+  "builders": [
+    {
+      "disk_size_gb": "{{user `disk_size_gb`}}",
+      "disk_type": "{{user `disk_type`}}",
+      "folder_id": "{{user `folder_id`}}",
+      "image_family": "docker",
+      "image_name": "docker-{{timestamp}}",
+      "instance_cores": "{{user `instance_cores`}}",
+      "instance_mem_gb": "{{user `instance_mem_gb`}}",
+      "platform_id": "standard-v1",
+      "preemptible": "{{user `preemptible`}}",
+      "service_account_key_file": "{{user `service_account_key_file`}}",
+      "source_image_id": "{{user `source_image_id`}}",
+      "ssh_username": "ubuntu",
+      "type": "yandex",
+      "use_ipv4_nat": "true"
+    }
+  ],
+  "provisioners": [
+    {
+      "playbook_file": "../ansible/playbooks/packer-python.yml",
+      "type": "ansible"
+    },
+    {
+      "playbook_file": "../ansible/playbooks/packer-docker.yml",
+      "type": "ansible"
+    }
+  ]
 }
