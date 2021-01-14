@@ -1,0 +1,19 @@
+---
+  - name: Playbook
+    hosts: all
+    become: true
+    # become: yes
+    tasks:
+    - name: Pull an image
+      community.docker.docker_image:
+        name: popadec/otus-reddit:1.0
+        source: pull
+
+    - name: Start container, connect to network and link
+      community.docker.docker_container:
+        name: otus-reddit-monolith
+        image: popadec/otus-reddit:1.0
+        state: started
+        container_default_behavior: no_defaults
+        ports:
+        - "9292:9292"
